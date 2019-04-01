@@ -7,11 +7,19 @@
 
 Due to Frank's bad rating as a passenger in an Uber, not many cars will pick him up when hailed. Frank has figured out that he has an 72% chance of not being picked up when he hails one of their cars. Out of the next 14 cars that Frank tries to hail, what is the probability that at least 10 will pick him up. Plot a bar chart that best illustrates the overall experiment.
 
+binomial dist
+
+s = scs.binom(14, 0.72)
+
+s.cdf(10)
+
 ### Q-02
 
 *5 PTS*
 
 You fit a linear regression to predict SAT score with many predictors, one of which is whether or not the student was homeschooled. Beta_homeschool = -40. How do you interpret the coefficient?
+
+the predictor beta_homeschool has an inverse relationship with the outcome, whether or not a student was homeschooled. would need to look at the z score to see if this beta coefficient is statistically different than 0.
 
 ### Q-03
 
@@ -19,11 +27,54 @@ You fit a linear regression to predict SAT score with many predictors, one of wh
 
 Give an example of a confusion matrix with accuracy > 90%, but both precision < 5% and recall < 5%. Prove your answer.
 
+TP=3
+TN=270
+FP=0
+FN=27
+Accuracy = (TP + TN) / (TP+TN+FP+FN)
+Accuracy -> 91
+
+Precision=TP/(TP+FP)
+Precision -> 0
+
+Recall = TP / (TP + FN)
+Recall -> 0
+
 ### Q-04
 
 *10 PTS*
 
 The `playgolf.csv` file has data on when is the best time to play golf. Imagine you're constructing a decision tree and the first split you make is on the `Outlook` column with the value `Sunny`. How much information have you gained by making that split?
+
+#calcualte entropy of the sample
+A=4/14
+B=5/14
+C=5/14
+
+A_ent = (A * math.log(A, 2)) * -1
+B_ent = (B * math.log(B, 2)) * -1
+C_ent = (C * math.log(C, 2)) * -1
+ent_prnt = A_ent + B_ent + C_ent
+ent_prnt=1.5774062828523452
+
+a = 2/5
+b = 3/5
+
+#calcualte entropy of left child, where entropy = proportion of class in the sample times to the log base2 of the proportion of class in the sample
+ent_lc = ((a * (math.log(a,2))) + (b * (math.log(b, 2))))*-1
+ent_lc=0.9709505944546686
+
+c = 7/9
+d = 2/9
+
+#calcualte entropy of left child, where entropy = proportion of class in the sample times to the log base2 of the proportion of class in the sample
+ent_rc = ((c * (math.log(c,2))) + (d * (math.log(d, 2))))*-1
+ent_rc=0.7642045065086203
+
+IG = ent_prnt - ((5/14) * ent_lc) + ((9/14) * ent_rc)*-1
+IG = 0.7393638877915648
+
+
 
 ### Q-05
 
@@ -43,11 +94,27 @@ test set recall:     52%
 
 What's going on? What tactic(s) do we have to modify our Decision Tree to fix the issue?
 
+The model seems to perform well on the training data; however, not so well on the test data.  Could be the result of overfitting.  Try some pruning.
+
+Pre-pruning ideas (pruning while you build the tree)
+○ Leaf size: stop splitting when the number of samples left gets small enough
+○ Depth: stop splitting at a certain depth (after a certain number of splits)
+○ Purity: stop splitting if enough of the examples are the same class
+○ Gain threshold: stop splitting when the information gain becomes too small
+
+Post-pruning ideas (pruning after you’ve finished building the tree)
+○ Merge terminal nodes (i.e., undo your split) if doing so decreases error in your test set
+○ Set the maximum number of terminal nodes; this is a form of regularization
+
+Prune by varying the following hyperparameters: max_depth, min_samples_split, min_samples_leaf, max_leaf_nodes
+
 ### Q-06
 
 *5 PTS*
 
 You have a linear regression model that is overfitting on training data. What regularization techniques do you have to help with this issue? How do these techniques differ?
+
+L1 (Lasso) minimizes number of parameters (feature engineering) and L2 (ridge regression) minimizes size of parameters
 
 ### Q-07
 
@@ -67,6 +134,8 @@ column_averages('data/example.csv')
 *10 PTS*
 
 I have two 6-sided dice. One is a standard die with the numbers 1-6. The other has three 3's and three 6's. You grab one at random and roll a six. What is the probability that you chose the fair die?
+
+
 
 ### Q-09
 
