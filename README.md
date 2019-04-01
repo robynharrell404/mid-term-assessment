@@ -135,7 +135,9 @@ column_averages('data/example.csv')
 
 I have two 6-sided dice. One is a standard die with the numbers 1-6. The other has three 3's and three 6's. You grab one at random and roll a six. What is the probability that you chose the fair die?
 
+fair die prob is 1/6 and unfair die prob is 3/6
 
+need to use bayes model to determine prob
 
 ### Q-09
 
@@ -165,6 +167,8 @@ There are two linearly independent columns (c1 and c2) hence its rank is 2.
 You have a model that predicts the price of the house given the number of square feet, number of rooms, age and size of plot. You use a regression model to predict the price. You try varying the degree of the polynomial used to fit the data. This graph shows mean squared error on the training and testing sets based on the "complexity" of the model (degree of the polynomial).
 
 What is going on in this graph? What would be an optimal choice for the degree of the polynomial?
+
+quadratic
 
 ![House](housing.png)
 
@@ -278,3 +282,10 @@ alpha=0.025
 se = sd/(s**0.5)
 z = (xbar - h0) / se
 se, z
+
+norm = scs.norm(0, 1)
+smple = scs.norm(h0, se)
+
+1-norm.cdf(z)
+
+do not reject null hypothesis
