@@ -153,6 +153,11 @@ You are given the following data of student grades in a 5-by-5 matrix.
 
 Make a guess of the rank of the matrix. Explain your guess.
 
+rank -> number of linearly independent rows or columns is called rank of matrix.
+c3=c1+c2
+c4=(c1+c2+c3)/100
+There are two linearly independent columns (c1 and c2) hence its rank is 2.
+
 ### Q-10
 
 *5 PTS*
@@ -182,6 +187,7 @@ Create a model which would have higher accuracy than any of the three models.
 *5 PTS*
 
 Logistic Regression internally creates a linear equation. How does the model use this linear equation to produce probabilities?
+logistic regression estimates the log odds of an event with the sigmoid function
 
 ### Q-13
 
@@ -189,35 +195,39 @@ Logistic Regression internally creates a linear equation. How does the model use
 
 What is grid search doing when it's running?
 
+grid search is best for ridge regression, i.e. reducing the size of predictors, runs k fold validation on a data set so that the model is exposed to all of the data and looks for optimal lambda, where lambda minimizes the cost function
+
 ### Q-14
 
 *5 PTS*
 
 If your linear regression model had a negative R-squared, what would be the simplest thing you could do to improve the model?
+Only use the mean value as your predictor
 
 ### Q-15
 
 *5 PTS*
 
-Due to overfitting on your linear regression model, you decide to use L2 regularization. How do you know when lambda is tuned to the correct value for optimal model performance?
+Due to overfitting on your linear regression model, you decide to use L2 regularization. How do you know when lambda is tuned to the correct value for optimal model performance? when the cost function is minimized
 
 ### Q-16
 
 *5 PTS*
 
 When scaling your data, why do you scale the test data set from the values in the training data set?
+so that the scaling is appropriate and you are comparing apples to apples
 
 ### Q-17
 
 *5 PTS*
 
-When computing probabilities, the CDF of a binomial distribution uses sigma notation while the CDF of a gamma distribution uses integral notation. Why is this?
+When computing probabilities, the CDF of a binomial distribution uses sigma notation while the CDF of a gamma distribution uses integral notation. Why is this? because the binomial distribution is discrete and the gamma function is continuous
 
 ### Q-18
 
 *5 PTS*
 
-Suppose you compare a five-predictor model with a higher R-squared to a one-predictor model. Is the five-predictor model better? Why?
+Suppose you compare a five-predictor model with a higher R-squared to a one-predictor model. Is the five-predictor model better? Why?  Not necessarily.  The 5 predictor model will have higher r squared simply due to the fact of having 5 predictors compared to 1 predictor.
 
 ### Q-19
 
@@ -243,3 +253,28 @@ At the manufacturing plant you work at, one empty 12-ounce aluminum soda should 
 14.69180529,  7.98256903, 11.98738448, 13.09929852, 18.00647745,
 13.37693129, 11.63440091, 19.55690723, 11.32272672,  9.65382463
 ```
+S=[14.76515145, 15.66921114, 20.15497514, 14.25750049, 13.03577315,
+8.26272148, 19.20985755, 12.04375879, 10.91085244, 11.68537558,
+15.76500706,  9.10184183, 12.27624773, 12.54001656, 17.38484272,
+17.57900201, 14.65171242, 15.81325345, 12.16072462,  9.66999714,
+15.39782075, 14.71051375, 12.87376932, 13.16569868, 13.1352791 ,
+17.62503595, 15.85801613, 16.08111466, 12.74932095,  8.78455273,
+15.67603836, 20.85680148, 13.55898338, 16.12441324, 18.89939279,
+9.74224957, 12.93047653, 15.26948315, 18.85026598,  9.6622572 ,
+14.69180529,  7.98256903, 11.98738448, 13.09929852, 18.00647745,
+13.37693129, 11.63440091, 19.55690723, 11.32272672,  9.65382463]
+
+np.mean(S)
+
+np.var(S)
+
+h0=15
+#h1 != 15
+s=50
+sd=10.41**0.5
+xbar=14.00
+alpha=0.025
+
+se = sd/(s**0.5)
+z = (xbar - h0) / se
+se, z
