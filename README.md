@@ -32,7 +32,7 @@ TN=270
 FP=0
 FN=27
 Accuracy = (TP + TN) / (TP+TN+FP+FN)
-Accuracy -> 91
+Accuracy -> 90
 
 Precision=TP/(TP+FP)
 Precision -> 0
